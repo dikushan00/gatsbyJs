@@ -1,13 +1,16 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+const IndexPage = ({data}) => (
   <Layout>
     <SEO title="Home" />
+    <p>{data.contentfulArticle.img.title}</p>
+    <p>{data.contentfulArticle.img.description}</p>
+      <img src={data.contentfulArticle.img.resolutions.src} alt=""/>
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
@@ -20,3 +23,17 @@ const IndexPage = () => (
 )
 
 export default IndexPage
+
+export const query = graphql`
+  query MyQuery {
+  contentfulArticle {
+    img {
+      title
+      description
+      resolutions {
+        src
+      }
+    }
+  }
+}
+`

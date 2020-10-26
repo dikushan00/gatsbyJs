@@ -3,28 +3,56 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { BrowserRouter, NavLink, Route } from "react-router-dom"
+import PlayerData from "../components/Players/PlayerData"
+import Aizere from "../components/AIzere"
 
-const IndexPage = ({data}) => (
-  <Layout>
-    <SEO title="Home" />
-    <p>{data.contentfulArticle.img.title}</p>
-    <p>{data.contentfulArticle.img.description}</p>
-      <img src={data.contentfulArticle.img.resolutions.src} alt=""/>
-  </Layout>
+const IndexPage = ({ data }) => (
+  <BrowserRouter>
+    <Layout>
+      <NavLink to="/player" style = {{display: "block"}}>Player link</NavLink>
+      <NavLink to="/aizere">Aizere</NavLink>
+      <SEO title="Home"/>
+      <div>
+        <Route path='/player' render={() => <PlayerData data={data}/>}/>
+        <Route path='/aizere' render={() => <Aizere data={data}/>}/>
+      </div>
+    </Layout>
+  </BrowserRouter>
 )
 
 export default IndexPage
 
 export const query = graphql`
   query MyQuery {
-  contentfulArticle {
-    img {
-      title
-      description
-      resolutions {
-        src
+    contentfulArticle(img: {resolutions: {}}) {
+      age
+      birthday
+      city
+      country
+      name
+      img {
+        title
+        description
+        resolutions {
+          src
+        }
+      }
+    }
+    contentfulPlayerData(faceImg: {}) {
+      height
+      goals
+      weight
+      name
+      country
+      city
+      birthday
+      age
+      faceImg {
+        resolutions {
+          src
+        }
       }
     }
   }
-}
 `

@@ -25,8 +25,8 @@ export const query = graphql`
     }
   }
 `
-// type DataProps = {
-//   site: {
-//     buildTime: string
-//   }
-// }
+type DataProps = {
+  site: {
+    buildTime: string
+  }
+}

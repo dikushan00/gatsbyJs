@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 
 import Header from "./header"
 import "./layout.css"
+import { Link } from "gatsby"
 
 const Layout = ({ children }) => {
 
@@ -19,6 +20,7 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
+        <Link to="/">Go to Main Page</Link>
         <footer style={{
           marginTop: `2rem`
         }}>

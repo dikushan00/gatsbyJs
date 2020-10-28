@@ -1,11 +1,14 @@
 import React from "react"
-import SEO from "../seo"
-import Layout from "../layout"
+import Layout from "../components/layout"
+import { graphql } from "gatsby"
+import SEO from "../components/seo"
 
-const PlayerData = ({ data }) => {
+const player = ({ data }) => {
+
+  if(!data) return <h1>Player</h1>
 
   return <Layout>
-    <SEO title="/playerData"/>
+    <SEO title="Player data"/>
     <div style={{ marginTop: "25px" }}>
       <img src={data.contentfulPlayerData.faceImg.resolutions.src} alt="PlayerPhoto" style={{ float: "left" }}/>
       <div style={{ marginLeft: "180px" }}>
@@ -22,4 +25,24 @@ const PlayerData = ({ data }) => {
   </Layout>
 }
 
-export default PlayerData
+export default player
+
+export const query = graphql`
+  query PlayerQuery2 {
+    contentfulPlayerData(faceImg: {}) {
+      height
+      goals
+      weight
+      name
+      country
+      city
+      birthday
+      age
+      faceImg {
+        resolutions {
+          src
+        }
+      }
+    }
+  }
+`

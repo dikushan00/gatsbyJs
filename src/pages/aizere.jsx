@@ -1,11 +1,14 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { graphql } from "gatsby"
 
-const Aizere = ({ data }) => {
+const aizere = ({ data }) => {
+
+  if(!data) return <h1>Aizere</h1>
 
   return <Layout>
-    <SEO title="/Aizere"/>
+    <SEO title="Aizere"/>
     <div>
       <p>{data.contentfulArticle.img.title}</p>
       <p>{data.contentfulArticle.img.description}</p>
@@ -18,4 +21,23 @@ const Aizere = ({ data }) => {
   </Layout>
 }
 
-export default Aizere
+export default aizere
+
+export const query = graphql`
+  query AizereQuery {
+    contentfulArticle(img: {resolutions: {}}) {
+      age
+      birthday
+      city
+      country
+      name
+      img {
+        title
+        description
+        resolutions {
+          src
+        }
+      }
+    }
+  }
+`
